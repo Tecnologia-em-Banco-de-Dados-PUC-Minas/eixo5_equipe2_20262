@@ -7,52 +7,79 @@ Análise Integrada de Dados Climáticos e Elétricos Utilizando Big Data Analyti
 
 **1\. Motivação da Escolha do Tema**
 
-Como grupo, decidimos focar no tema **Energia & Clima** por entendermos que ele representa um dos cenários mais aderentes e desafiadores para a aplicação real dos conceitos de **Big Data Analytics**. Nossa escolha foi pautada em três pilares fundamentais:
+Como grupo, decidimos dar continuidade ao tema Energia & Clima por entendermos que ele representa um cenário relevante e desafiador para a aplicação integrada de conceitos de Big Data Analytics e Machine Learning. A etapa anterior permitiu estruturar uma arquitetura de dados capaz de integrar informações climáticas, hidrológicas e elétricas, criando uma base consistente para a evolução do projeto em direção a análises preditivas.
+
+A continuidade proposta busca ampliar a capacidade analítica da solução, avançando da identificação de padrões históricos e relações entre variáveis para a construção de modelos capazes de estimar comportamentos futuros da geração e da demanda de energia elétrica.
 
 **1.1 Aderência aos “Vs” do Big Data (Volume, Velocidade e Variedade)**
 
-O setor elétrico brasileiro e o monitoramento climático geram um fluxo contínuo e massivo de dados. Ao utilizarmos fontes públicas governamentais, como o Operador Nacional do Sistema Elétrico (ONS) e o Instituto Nacional de Meteorologia (INMET), teremos acesso a séries temporais de alta frequência, com dados horários ou próximos do tempo real.
+O setor elétrico brasileiro e o monitoramento climático geram continuamente grandes volumes de dados, provenientes de diferentes fontes e apresentados em distintas granularidades temporais e formatos. O projeto utiliza bases públicas de instituições como o Operador Nacional do Sistema Elétrico (ONS) e o Instituto Nacional de Meteorologia (INMET), contendo séries temporais relacionadas à geração, carga, hidrologia e condições meteorológicas.
 
-Isso nos permite trabalhar com um volume substancial de dados brutos em diferentes formatos, como JSON, CSV e APIs REST, exigindo o desenho de uma arquitetura de ingestão, tratamento e processamento de dados robusta.
+A diversidade, o volume e a frequência dessas informações tornam o cenário adequado para aplicação de técnicas de Big Data, exigindo processos de ingestão, armazenamento, tratamento, integração e processamento capazes de garantir qualidade e consistência para análises avançadas.
 
 **1.2. Relevância Socioeconômica e Prática**
 
-A matriz elétrica brasileira é fortemente dependente de fontes renováveis, como hidrelétrica, eólica e solar, o que a torna intrinsecamente sensível às variações climáticas.
+A matriz elétrica brasileira possui participação significativa de fontes renováveis, como hidrelétrica, eólica e solar, fazendo com que a disponibilidade e o desempenho dessas fontes sejam diretamente influenciados por condições ambientais e climáticas.
 
-Compreender a correlação entre variáveis como velocidade do vento, incidência de radiação solar, índices pluviométricos e temperatura com a curva de geração e demanda de energia não é apenas um exercício acadêmico, mas uma necessidade estratégica para o planejamento e a segurança energética do país.
+Variáveis como precipitação, temperatura, velocidade do vento e radiação solar apresentam relação com a geração de energia, enquanto fatores climáticos também podem influenciar o comportamento da demanda elétrica. A compreensão dessas relações é relevante para o planejamento e para a segurança energética, especialmente diante do crescimento da participação das fontes renováveis no sistema elétrico brasileiro.
+
+Nesse contexto, a utilização de Machine Learning amplia o potencial do projeto ao permitir que padrões identificados nos dados históricos sejam utilizados para estimar comportamentos futuros, oferecendo uma camada adicional de apoio à tomada de decisão.
 
 **1.3. Desafio Técnico de Integração de Dados**
 
-O cruzamento de dados climáticos e elétricos apresenta desafios relevantes de engenharia de dados, especialmente devido às diferenças de granularidade temporal e espacial entre as fontes.
+O cruzamento de dados climáticos, hidrológicos e elétricos apresenta desafios relacionados principalmente às diferenças de granularidade temporal, localização geográfica, qualidade dos registros e padronização das diferentes fontes.
 
-Por exemplo, dados provenientes de estações meteorológicas precisam ser correlacionados com a localização geográfica de usinas e centros de carga, exigindo processos de padronização, modelagem e integração de dados.
+Dados meteorológicos provenientes de estações precisam ser associados às regiões, usinas e demais estruturas do sistema elétrico, exigindo processos de tratamento, modelagem e integração.
 
-Resolver essas complexidades demonstra domínio de práticas fundamentais de engenharia e análise de dados, reforçando o caráter aplicado do projeto.
+A continuidade do projeto acrescenta um novo desafio técnico: preparar essas informações para utilização em modelos de Machine Learning. Isso envolve análise exploratória, tratamento de valores ausentes e anômalos, seleção de variáveis, criação de atributos derivados de séries temporais e definição adequada das variáveis que serão previstas pelos modelos.
+
+**1.4. Potencial Preditivo dos Dados**
+
+A existência de séries históricas integradas de clima, geração, carga e hidrologia cria condições para avançar de uma abordagem predominantemente descritiva e diagnóstica para uma abordagem preditiva.
+
+A análise histórica permite identificar sazonalidades, tendências, correlações e comportamentos recorrentes. A partir desses padrões, técnicas de Machine Learning podem ser utilizadas para estimar variáveis futuras do sistema elétrico e avaliar quais fatores apresentam maior influência sobre essas previsões.
+
+Essa evolução permite transformar a infraestrutura de dados já desenvolvida em uma solução capaz não apenas de explicar o comportamento histórico do sistema, mas também de gerar informações úteis para antecipação de cenários
 
 **2\. Contexto do Problema e Cliente**
 
-O presente projeto considera como cliente fictício o Operador Nacional do Sistema Elétrico (ONS), entidade responsável pela coordenação e controle da operação das instalações de geração e transmissão de energia elétrica no Brasil. Sua atuação é fundamental para garantir o equilíbrio entre a oferta e a demanda de energia, assegurando a estabilidade e a confiabilidade do sistema elétrico nacional.
+O projeto considera como cliente fictício o Operador Nacional do Sistema Elétrico (ONS), entidade responsável pela coordenação e controle da operação das instalações de geração e transmissão de energia elétrica no Sistema Interligado Nacional.
 
-Um dos principais desafios enfrentados pelo ONS está relacionado à gestão eficiente dos recursos hídricos utilizados na geração hidrelétrica, que representa parcela significativa da matriz elétrica brasileira. A operação dos reservatórios exige decisões contínuas sobre armazenamento, liberação e aproveitamento da água, de forma a maximizar a geração de energia e minimizar desperdícios, ao mesmo tempo em que se preserva a segurança do sistema.
+Sua atuação exige a manutenção contínua do equilíbrio entre oferta e demanda de energia, assegurando estabilidade, confiabilidade e segurança operacional.
 
-Nesse contexto, a análise de dados hidrológicos e operacionais torna-se essencial para apoiar a tomada de decisão. A compreensão do comportamento dos reservatórios, incluindo níveis de armazenamento, vazões de entrada e saída, padrões de operação das usinas e fluxos entre bacias, permite avaliar a eficiência do uso da água e identificar oportunidades de melhoria na gestão do sistema. Além disso, a identificação de gargalos operacionais e padrões de desempenho contribui para um planejamento mais assertivo e para a otimização da geração hidrelétrica.
+Na etapa anterior do projeto, foram integradas informações relacionadas à geração de energia, carga do sistema, condições climáticas e variáveis hidrológicas, permitindo analisar relações entre clima e desempenho energético.
 
-Dessa forma, o projeto propõe responder à seguinte questão central de análise: “Como o desempenho operacional dos reservatórios e usinas hidrelétricas impactam a eficiência da geração de energia no sistema elétrico brasileiro, e de que forma a análise desses dados pode apoiar decisões mais eficazes na gestão dos recursos hídricos?”
+Entre os aspectos considerados estão o comportamento dos reservatórios, vazões de entrada e saída, geração das usinas, disponibilidade de recursos hídricos e influência de variáveis climáticas sobre diferentes fontes de geração.
 
-A partir dessa perspectiva, o desenvolvimento de um sistema analítico baseado em dados permitirá avaliar a criticidade dos subsistemas em termos de armazenamento, analisar o balanço hídrico dos reservatórios, mensurar a eficiência da geração a partir do uso da água, identificar períodos de maior aporte hídrico e mapear a dependência entre bacias por meio da transferência de vazões. Adicionalmente, será possível estabelecer comparações de desempenho entre usinas, construir indicadores de criticidade baseados em volume e afluência, identificar gargalos operacionais e agrupar reservatórios de acordo com seus padrões de comportamento, contribuindo para uma visão integrada e orientada à performance do sistema hidrelétrico nacional.
+A continuidade do projeto busca ampliar essa capacidade analítica por meio da utilização de Machine Learning. A proposta consiste em utilizar o histórico disponível para identificar padrões e desenvolver modelos capazes de estimar o comportamento futuro de variáveis relevantes do sistema elétrico.
 
+Dessa forma, a questão central de análise passa a ser:
+
+Como dados históricos climáticos, hidrológicos e elétricos podem ser utilizados para identificar padrões e construir modelos de Machine Learning capazes de prever o comportamento da geração e da demanda de energia elétrica, apoiando decisões operacionais no Sistema Interligado Nacional?
+
+A partir dessa questão, o projeto pretende explorar a capacidade preditiva das informações já integradas, estabelecendo relações entre variáveis ambientais, hidrológicas, temporais e energéticas.
+
+Além da análise histórica já desenvolvida, a solução deverá permitir comparar valores observados e previstos, avaliar o desempenho dos modelos construídos e identificar os fatores que mais contribuem para as previsões realizadas.
+
+3. Objetivo Geral
+   
 **3\. Objetivo Geral**
 
-Desenvolver um sistema analítico baseado em dados capaz de integrar informações climáticas e energéticas, com o objetivo de analisar como variáveis ambientais influenciam a geração de energia e a demanda elétrica no sistema brasileiro, apoiando a tomada de decisão operacional no contexto do Operador Nacional do Sistema Elétrico (ONS).
+Desenvolver uma solução analítica e preditiva baseada em Big Data Analytics e Machine Learning capaz de integrar e explorar dados climáticos, hidrológicos e energéticos, identificar padrões históricos e construir modelos de previsão do comportamento da geração e da demanda elétrica, contribuindo para a tomada de decisão operacional no contexto do Operador Nacional do Sistema Elétrico.
 
 **3.1. Objetivos Específicos**
 
-* Realizar a coleta e integração de dados provenientes de fontes públicas, incluindo dados de geração e carga do sistema elétrico e dados climáticos, garantindo consistência temporal e estrutural entre as bases.  
-* Tratar, padronizar e organizar os dados em um ambiente estruturado, permitindo sua utilização para análise e construção de indicadores.  
-* Desenvolver indicadores analíticos que permitam avaliar a relação entre variáveis climáticas (como temperatura, velocidade do vento, radiação solar e precipitação) e variáveis do sistema elétrico (como geração por fonte e demanda de energia).  
-* Construir um modelo de dados que viabilize a exploração analítica das informações por meio de consultas e agregações.  
-* Desenvolver dashboards interativos que permitam a visualização dos dados e dos indicadores construídos, facilitando a interpretação dos resultados.  
-* Apoiar a compreensão dos impactos das variáveis climáticas na operação do sistema elétrico, contribuindo para a tomada de decisão baseada em dados.
+* Realizar a integração e consolidação dos dados provenientes de fontes públicas relacionadas à geração, carga do sistema, hidrologia e condições climáticas.
+* Avaliar a qualidade, completude e consistência temporal das informações utilizadas na construção dos modelos.
+* Realizar análise exploratória dos dados para identificar tendências, sazonalidades, correlações, anomalias e padrões relevantes.
+* Desenvolver atributos derivados das séries temporais, incluindo informações de calendário, defasagens temporais e médias móveis, quando aplicáveis.
+* Identificar as variáveis climáticas, hidrológicas e energéticas com maior potencial explicativo e preditivo.
+* Desenvolver modelos de Machine Learning voltados à previsão de variáveis relacionadas ao sistema elétrico.
+* Comparar diferentes algoritmos e abordagens de previsão, avaliando sua capacidade de generalização.
+* Avaliar os modelos por meio de métricas quantitativas adequadas ao problema, como MAE, RMSE, MAPE e coeficiente de determinação R².
+* Analisar a importância e a contribuição das diferentes variáveis utilizadas pelos modelos para a obtenção das previsões.
+* Disponibilizar os resultados preditivos em ambiente analítico, permitindo a comparação entre valores reais e previstos.
+* Utilizar as informações geradas pelos modelos para apoiar a compreensão do comportamento futuro do sistema e subsidiar processos de tomada de decisão baseada em dados.
 
 **4\. Definição das Métricas e Indicadores de Análise**
 
@@ -62,8 +89,36 @@ No campo climático, serão utilizadas métricas como temperatura média, veloci
 
 A partir dessas métricas, serão construídos indicadores analíticos que permitam compreender a relação entre condições climáticas e geração ou demanda de energia. Entre os principais indicadores previstos estão: a correlação entre velocidade do vento e geração eólica, o impacto da radiação solar na geração fotovoltaica, a relação entre precipitação e geração hidrelétrica e a influência da temperatura na demanda elétrica. Esses indicadores permitirão identificar padrões, dependências e possíveis tendências entre variáveis ambientais e energéticas. 
 
+**4.1. Hipóteses de Análise
+
+A continuidade do projeto será orientada pelas seguintes hipóteses:
+
+H1: A incorporação de variáveis climáticas aos dados históricos de carga contribui para melhorar a capacidade de previsão da demanda de energia elétrica.
+
+H2: Variáveis relacionadas à precipitação, vazão e armazenamento apresentam capacidade explicativa e preditiva sobre o comportamento da geração hidrelétrica.
+
+H3: A utilização de atributos temporais, como mês, dia da semana, sazonalidade e valores históricos defasados, aumenta a capacidade preditiva dos modelos.
+
+H4: Modelos capazes de representar relações não lineares entre as variáveis podem apresentar desempenho superior a modelos lineares simples.
+
+H5: A análise da importância das variáveis utilizadas pelos modelos permitirá identificar quais fatores climáticos, hidrológicos e temporais apresentam maior contribuição para as previsões energéticas.
+
 **5\. Recorte Temporal da Análise**
 
-O estudo adotará como recorte temporal o período entre 2020 e 2024, considerando tanto a disponibilidade de dados públicos nas plataformas institucionais quanto a relevância de um período recente para análise de tendências climáticas e energéticas.
+Na etapa anterior do projeto foi inicialmente definido o período entre 2020 e 2024 para análise das tendências climáticas e energéticas.
 
-Esse intervalo de cinco anos possibilita trabalhar com um volume significativo de dados em séries temporais, permitindo observar padrões sazonais, variações anuais e eventuais anomalias climáticas que possam impactar a geração e o consumo de energia. Além disso, trata-se de um período marcado pela expansão das fontes renováveis, especialmente da geração solar e eólica no Brasil, tornando a análise ainda mais relevante para compreender a crescente dependência da matriz elétrica em relação às condições climáticas.Texto
+Entretanto, a infraestrutura desenvolvida posteriormente passou a contemplar uma série histórica ampliada, incluindo dados entre 2016 e 2024.
+
+Para a etapa de Machine Learning, será utilizado preferencialmente o maior período histórico disponível que apresente qualidade e consistência suficientes entre as diferentes fontes de dados.
+
+A utilização de uma série histórica mais extensa permite aumentar a quantidade de observações disponíveis para treinamento, além de possibilitar melhor representação de ciclos sazonais, períodos de maior ou menor disponibilidade hídrica e diferentes comportamentos climáticos e energéticos.
+
+Os dados serão divididos respeitando sua sequência cronológica, separando períodos destinados ao treinamento, validação e teste dos modelos. Essa abordagem evita que informações futuras sejam utilizadas durante o processo de treinamento e permite avaliar de maneira mais realista a capacidade de previsão da solução.
+
+Como estratégia inicial, poderão ser utilizados:
+
+Treinamento: 2016 a 2022
+Validação: 2023
+Teste: 2024
+
+A definição final desses intervalos poderá ser ajustada de acordo com a disponibilidade, completude e qualidade dos dados integrados.
