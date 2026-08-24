@@ -11,7 +11,7 @@ O projeto consiste no desenvolvimento de um sistema de Big Data Analytics e Mach
 * Dayane Martins de Brito
 * Jordan Machado Camara
 * Luiz Augusto dos Santos Junior
-* Victor Henrique Gonçalves do Nascimento
+* Samuel Natã de Oliveira Moura
 
 ## Orientador
 * Professor Cristiano Geraldo Teixeira Silva 
