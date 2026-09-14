@@ -3,7 +3,7 @@ Arquitetura de Dados em Nuvem
 
 # Análise Integrada e Preditiva de Dados Climáticos e Elétricos utilizando Big Data Analytics e Machine Learning
 `Tecnologia em Banco de Dados`
-`2026/1°`
+`2026/2°`
 
 O projeto consiste no desenvolvimento de um sistema de Big Data Analytics e Machine Learning voltados para o setor elétrico brasileiro, com foco em apoiar as decisões estratégicas do Operador Nacional do Sistema Elétrico (ONS). O objetivo central é coletar, integrar e analisar dados climáticos (como temperatura, velocidade do vento, radiação solar e precipitação) provenientes do INMET em conjunto com dados hidrológicos e operacionais do ONS. A partir dessa correlação, o sistema busca avaliar como as variações ambientais impactam a demanda nacional e a eficiência da geração de energia, especialmente das fontes renováveis (hidrelétrica, eólica e solar), visando otimizar a gestão dos recursos hídricos.
 
