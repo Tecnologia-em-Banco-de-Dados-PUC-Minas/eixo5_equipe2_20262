@@ -1,4 +1,4 @@
-ETAPA 2 — COLETA, MODELO INICIAL E GOVERNANÇA DE DADOS
+# ETAPA 2 — COLETA, MODELO INICIAL E GOVERNANÇA DE DADOS
 1. Estratégia de Coleta de Dados
 
 A coleta de dados deste projeto dá continuidade à infraestrutura desenvolvida no semestre anterior, reaproveitando o Data Lake e os processos de ingestão, transformação e integração já implementados.
