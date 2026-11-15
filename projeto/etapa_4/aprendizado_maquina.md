@@ -1,8 +1,15 @@
-# 4. ETAPA 4 —  MODELAGEM E PREVISÃO DE CARGA ELÉTRICA
+# 4. ETAPA 4 — MODELAGEM E PREVISÃO DE CARGA ELÉTRICA
 
+Esta etapa apresenta a construção, o treinamento e a comparação técnica dos modelos de aprendizado de máquina aplicados à previsão de carga elétrica no Sistema Interligado Nacional (SIN), organizados em duas frentes complementares:
 
-**Código em:**
-|[modelo python](modelo2.py)|
+1. **Parte I — Modelo Baseline Mensal (`modelo2.py`):** primeira abordagem por subsistema na escala mensal, utilizando tendência temporal e sazonalidade de calendário (sem variáveis climáticas).
+2. **Parte II — Comparação de Modelos na Base Diária com Clima (`comparacao_modelos/`):** evolução do experimento na granularidade diária integrando dados meteorológicos do INMET e histórico recente da carga (*lags*), comparando **Regressão Linear**, **Random Forest** e **Gradient Boosting**.
+
+---
+
+# PARTE I — MODELO INICIAL MENSAL (REGRESSÃO LINEAR)
+
+**Código em:** [`modelo2.py`](modelo2.py)
 
 ## 1.1. Base de dados
 
@@ -33,21 +40,16 @@ Também foram identificados padrões sazonais distintos:
 ### Evolução histórica da carga
 
 ![Evolução da carga do Nordeste](imagens/evolucao_nordeste.png)
-![Evolução da carga do Nordeste](imagens/evolucao_norte.png)
-![Evolução da carga do Nordeste](imagens/evolucao_sudeste_centro_oeste.png)
-![Evolução da carga do Nordeste](imagens/evolucao_sul.png)
-
-
-
+![Evolução da carga do Norte](imagens/evolucao_norte.png)
+![Evolução da carga do Sudeste/Centro-Oeste](imagens/evolucao_sudeste_centro_oeste.png)
+![Evolução da carga do Sul](imagens/evolucao_sul.png)
 
 ### Sazonalidade mensal
 
-
 ![Sazonalidade da carga do Nordeste](imagens/sazonalidade_nordeste.png)
-![Sazonalidade da carga do Nordeste](imagens/sazonalidade_norte.png)
-![Sazonalidade da carga do Nordeste](imagens/sazonalidade_sudeste_centro_oeste.png)
-![Sazonalidade da carga do Nordeste](imagens/sazonalidade_sul.png)
-
+![Sazonalidade da carga do Norte](imagens/sazonalidade_norte.png)
+![Sazonalidade da carga do Sudeste/Centro-Oeste](imagens/sazonalidade_sudeste_centro_oeste.png)
+![Sazonalidade da carga do Sul](imagens/sazonalidade_sul.png)
 
 ## 1.3. Modelo utilizado
 
@@ -60,7 +62,7 @@ O modelo considera duas variáveis principais:
 
 De forma simplificada, o modelo estima a carga a partir da tendência temporal e dos efeitos associados a cada mês.
 
-As variáveis climáticas disponíveis na base não foram incluídas nesta primeira versão, ficando como possibilidade de melhoria para trabalhos futuros.
+As variáveis climáticas disponíveis na base não foram incluídas nesta primeira versão, ficando implementadas na Parte II desta etapa.
 
 ## 1.4. Treinamento e avaliação
 
@@ -85,17 +87,7 @@ A regressão apresentou resultado melhor que o baseline apenas no subsistema Sul
 
 O Norte apresentou o maior erro relativo, enquanto o Sul teve o melhor resultado da regressão.
 
-## 1.5. Análise dos resultados
-
-A análise dos erros mostrou que o modelo subestimou a carga nos quatro subsistemas durante o período de teste. Essa diferença foi maior em 2024, indicando que a tendência estimada não acompanhou integralmente o crescimento observado.
-
-Esse comportamento demonstra uma limitação da abordagem utilizada, que considera apenas a tendência linear e a sazonalidade mensal, sem incorporar outros fatores que podem influenciar a demanda de energia.
-
-**Comparação entre valores reais e previstos**
-
-\<!-- INSERIR AQUI OS GRÁFICOS DE RESULTADO. Arquivos com nome iniciado por resultado\_ -->
-
-## 1.6. Previsão para 2025
+## 1.5. Previsão para 2025
 
 Após a avaliação, o modelo foi ajustado novamente utilizando todo o histórico de 2016 a 2024, gerando previsões mensais para 2025.
 
@@ -116,38 +108,92 @@ Como exemplo, as estimativas para o subsistema Nordeste foram:
 | Novembro  |        13.302,38 |
 | Dezembro  |        13.231,01 |
 
-As previsões devem ser interpretadas considerando as limitações identificadas na avaliação, principalmente a subestimação da carga nos anos de teste.
+## 1.6. Arquivos e resultados visuais do modelo mensal (`modelo2.py`)
 
-## 1.7. Considerações finais
-
-A modelagem permitiu desenvolver uma primeira abordagem de previsão mensal para os quatro subsistemas. Os resultados mostraram que a regressão linear com tendência e sazonalidade teve desempenho variável, superando o baseline apenas no Sul.
-
-Como melhorias futuras, podem ser avaliadas a inclusão de variáveis climáticas, a utilização de outros modelos de séries temporais e a análise de fatores que expliquem as mudanças recentes no comportamento da carga.
-
-# 2. ARQUIVOS E CÓDIGOS DESENVOLVIDOS
-
-O principal código desenvolvido nesta etapa foi o `modelo2.py`, responsável pela consulta, preparação dos dados, treinamento, avaliação e geração das previsões.
-
-A execução do script produz os seguintes arquivos:
+O principal código desta primeira entrega é o [`modelo2.py`](modelo2.py), responsável pela consulta, preparação mensal, treinamento, avaliação e geração das previsões.
 
 | Arquivo | Descrição |
 |---|---|
-| `modelo2.py` | Script principal da modelagem |
-| `metricas_modelo2.csv` | Métricas de avaliação dos modelos |
+| [`modelo2.py`](modelo2.py) | Script principal da modelagem mensal |
+| `metricas_modelo2.csv` | Métricas de avaliação dos modelos mensais |
 | `previsoes_teste_modelo2.csv` | Valores reais e previstos no período de teste |
-| `previsao_2025_modelo2.csv` | Previsões para 2025 |
-
-Os gráficos de comparação entre valores reais e previstos são gerados separadamente pelo script `graficos_modelo2.py`.
+| `previsao_2025_modelo2.csv` | Previsões mensais para 2025 |
 
 Foram utilizadas as bibliotecas Python `awswrangler`, `pandas`, `numpy` e `matplotlib`, além do Amazon Athena para consulta aos dados.
 
-# 3. RESULTADOS DA MODELAGEM
+### Resultados visuais do modelo mensal (`modelo2.py`)
 
-Ao final da etapa, foram obtidos quatro modelos de regressão, uma avaliação comparativa com o baseline sazonal e previsões mensais para 2025.
+![Resultados Nordeste](imagens/resultado%20nordeste.png)
+![Resultados Norte](imagens/resultado%20norte.png)
+![Resultados Sudeste/Centro-Oeste](imagens/resultado%20sudeste_centro-oeste.png)
+![Resultados Sul](imagens/resultado%20sul.png)
 
-A comparação evidenciou que modelos mais simples podem apresentar resultados competitivos e que o desempenho varia entre os subsistemas. Os resultados também apontaram oportunidades de melhoria, principalmente na representação do crescimento recente da carga e na inclusão de novas variáveis explicativas.
+---
 
-![Resultados_Nordeste](imagens/resultado%20nordeste.png)
-![Resultados_Nordeste](imagens/resultado%20norte.png)
-![Resultados_Nordeste](imagens/resultado%20sudeste_centro-oeste.png)
-![Resultados_Nordeste](imagens/resultado%20sul.png)
+# PARTE II — COMPARAÇÃO DE ALGORITMOS NA BASE DIÁRIA COM CLIMA E DEFASAGENS
+
+**Pasta dos códigos e resultados:** [`comparacao_modelos/`](comparacao_modelos/README.md)
+
+Para superar as limitações observadas na abordagem mensal sem clima e atender às hipóteses `H1`, `H3`, `H4` e `H5` definidas na Etapa 1, os algoritmos foram implementados na **granularidade diária**, unindo carga elétrica, variáveis meteorológicas e histórico recente da demanda.
+
+## 2.1. Preparação da base diária e atributos (`preparacao.py`)
+
+O módulo [`comparacao_modelos/preparacao.py`](comparacao_modelos/preparacao.py) executa a extração integrada diretamente na camada Gold do Amazon Athena (`db_energia_clima_puc`), cruzando `gold_fato_carga` (ONS), `gold_fato_clima` (INMET) e `gold_dim_localizacao` (IBGE) conforme o mapeamento elétrico oficial dos quatro subsistemas (`SE`, `S`, `NE`, `N`) entre **2016 e 2024** (`13.152` registros diários).
+
+Durante a extração, registros anômalos de sensores meteorológicos são filtrados em SQL (por exemplo, temperaturas médias entre `-10 °C` e `50 °C` e radiação global entre `0` e `4.500 kJ/m²`). Em seguida, são construídos os grupos de variáveis de entrada, respeitando estritamente a ordem cronológica por subsistema (sem vazamento de dados futuros):
+
+- **Variáveis climáticas (INMET):** `temp_max`, `temp_media`, `temp_min`, `precipitacao_total`, `radiacao_global`, `vento_vel_media`, além de `temp_media_lag_1` (temperatura média do dia anterior) e `temp_media_3d` (média móvel dos últimos 3 dias).
+- **Variáveis de calendário e estrutura:** `id_subsistema`, `dia_semana`, `mes`, `dia_ano`, `tendencia` (dias desde `2016-01-01`) e `feriado` (incluindo feriados nacionais e pontos facultativos como Carnaval e Corpus Christi via biblioteca `holidays`).
+- **Defasagens recentes da carga (*lags*):** `carga_lag_1` (carga do dia anterior), `carga_lag_7` (mesmo dia da semana anterior) e `carga_media_7d` (média móvel dos 7 dias anteriores).
+
+## 2.2. Divisão cronológica e pré-processamento sem vazamento
+
+Seguindo o recorte experimental definido na Etapa 1, os dados diários foram divididos em ordem estritamente temporal:
+
+| Etapa | Período | Quantidade de Registros | Finalidade |
+| :--- | :--- | :---: | :--- |
+| **Treino inicial** | `2016` a `2022` | `10.200` | Ajuste inicial dos modelos na busca em grade |
+| **Validação** | `2023` | `1.460` | Escolha dos melhores hiperparâmetros sem tocar em `2024` |
+| **Retreinamento** | `2016` a `2023` | `11.660` *(c/ lags)* / `11.688` *(s/ lags)* | Incorporar o comportamento mais recente antes da avaliação final |
+| **Teste final (*holdout*)** | `2024` | `1.464` | Avaliação imparcial de desempenho nos 4 subsistemas |
+
+Os pré-processadores (`SimpleImputer` pela mediana, `StandardScaler` para a Regressão Linear e `OrdinalEncoder`/`OneHotEncoder`) foram encapsulados em `Pipeline` do `scikit-learn`, garantindo ajuste exclusivo nos dados de treino. Para modelos em árvore e na variante linear com defasagens, utilizou-se transformação logarítmica no alvo (`TransformedTargetRegressor` com `np.log`/`np.exp`) a fim de equilibrar as diferentes ordens de grandeza entre subsistemas (`SE` ≈ `45.000 MWmed` vs. `N` ≈ `7.500 MWmed`).
+
+## 2.3. Algoritmos comparados e hiperparâmetros selecionados
+
+1. **[`01_regressao_linear.py`](comparacao_modelos/01_regressao_linear.py) — Regressão Linear Diária (com clima):**
+   - Modelo linear de referência usando clima e calendário na base diária (sem *lags*), permitindo avaliar o ganho dos modelos baseados em árvores sobre o mesmo conjunto de atributos climáticos.
+   - No comparativo final, avaliou-se também a variante **Regressão Linear + Defasagens (`log-log`)**, na qual os *lags* da carga entram igualmente em escala logarítmica.
+2. **[`02_gradient_boosting.py`](comparacao_modelos/02_gradient_boosting.py) — Gradient Boosting (`HistGradientBoostingRegressor`):**
+   - Algoritmo de conjunto (*ensemble*) baseado em árvores de decisão sequenciais, em que cada nova árvore ajusta os erros residuais das anteriores. Trata nativamente valores ausentes de estações do INMET nos dias sem medição.
+   - **Melhores hiperparâmetros na validação (`2023`, `MAPE = 3,57%`):** `learning_rate = 0.03`, `max_iter = 400`, `max_leaf_nodes = 15`, `min_samples_leaf = 10`.
+3. **[`03_random_forest.py`](comparacao_modelos/03_random_forest.py) — Random Forest (`RandomForestRegressor`):**
+   - Terceiro algoritmo avaliado pela equipe: conjunto paralelo (*bagging*) com centenas de árvores de decisão treinadas sobre subamostras aleatórias dos dados e dos atributos, combinadas por média.
+   - **Melhores hiperparâmetros na validação (`2023`, `MAPE = 3,19%`):** `n_estimators = 400`, `max_features = 0.7`, `min_samples_leaf = 5`.
+4. **Modelo de Referência Semanal (`carga_lag_7`):**
+   - Regra simples que projeta para o dia atual exatamente a carga registrada sete dias antes.
+
+> **Observação sobre dias pós-feriado na defasagem semanal (mapeada para a Etapa 6):** na inspeção dos desvios de janeiro de `2024`, identificou-se que na segunda-feira **`08/01/2024`** (`Carga real = 47,1 mil MWmed`, `Temp. máxima = 31,6 °C`) a referência `carga_lag_7` apontou para **`01/01/2024`** (`35,1 mil MWmed`, feriado de Ano-Novo), criando uma defasagem abrupta de `+12,0 mil MWmed`. Com isso, fica registrada como **otimização para a Etapa 6** a sinalização ou filtragem de dias úteis cuja semana anterior (`t-7`) tenha sido feriado (`feriado_lag_7`).
+
+## 2.4. Comparação global e seleção do algoritmo vencedor (teste de 2024)
+
+Para identificar qual algoritmo oferece o melhor equilíbrio entre acurácia e generalização, compararam-se todas as abordagens exatamente sobre os `1.464` dias inéditos de `2024` utilizando:
+
+- **MAE (*Mean Absolute Error*, em MWmed):** erro médio absoluto diário;
+- **RMSE (*Root Mean Squared Error*, em MWmed):** raiz do erro quadrático médio (mais sensível a desvios elevados);
+- **R² (Coeficiente de Determinação):** fração da variabilidade explicada pelo modelo (até `1,00`);
+- **MAPE (*Mean Absolute Percentage Error*, em %):** erro médio relativo em porcentagem da carga observada.
+
+| Modelo | MAE (MWmed) | RMSE (MWmed) | R² | MAPE (%) |
+| :--- | ---: | ---: | ---: | ---: |
+| **Gradient Boosting (`HistGradientBoosting`)** | **424,74** | **691,18** | **0,9978** | **2,20%** |
+| **Regressão Linear + Defasagens (`log-log`)** | 499,06 | 769,97 | 0,9972 | **2,77%** |
+| **Random Forest (`RandomForestRegressor`)** | 577,26 | 908,39 | 0,9961 | **3,09%** |
+| Modelo de Referência Semanal (`carga_lag_7`) | 961,80 | 1.684,20 | 0,9867 | **4,48%** |
+| Regressão Linear Diária (clima e calendário, sem defasagens) | 1.793,38 | 2.899,57 | 0,9607 | **8,19%** |
+
+![Comparação global de MAPE entre os modelos em 2024](comparacao_modelos/resultados/comparacao_mape.png)
+
+O **Gradient Boosting** obteve o menor erro em todas as métricas (`MAPE = 2,20%`, `MAE = 424,74 MWmed`, `RMSE = 691,18 MWmed`, `R² = 0,9978`) e foi selecionado como modelo principal para a etapa seguinte.
+
+A análise detalhada dos parâmetros, do impacto das variáveis de entrada, do comportamento regional nos quatro subsistemas e das descobertas climáticas/operacionais é apresentada na [Etapa 5 — Análise dos Resultados](../etapa_5/analise_resultados.md).
