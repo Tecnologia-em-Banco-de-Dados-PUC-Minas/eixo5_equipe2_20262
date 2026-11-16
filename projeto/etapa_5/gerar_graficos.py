@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Gerador de gráficos científicos (PNG 300 DPI + GIFs) em estilo acadêmico clássico
-(fundo branco, tipografia serifada e moldura completa) para a Etapa 4 Visual e Etapa 5.
+(fundo branco, tipografia serifada e moldura completa) para a Etapa 4 e Etapa 5.
 
 Todas as figuras são calculadas diretamente sobre os dados reais do projeto:
 - data/processed/base_modelagem_diaria.csv
@@ -43,7 +43,7 @@ DATA_PATH = ROOT / "data" / "processed" / "base_modelagem_diaria.csv"
 GEO_PATH = ROOT / "data" / "processed" / "br_ufs.geojson"
 RES_DIR = ROOT / "src" / "resultados"
 
-DIR_ETAPA4 = ROOT / "entrega_oficial" / "projeto" / "etapa_4_visual" / "imagens"
+DIR_ETAPA4 = ROOT / "entrega_oficial" / "projeto" / "etapa_4" / "imagens"
 DIR_ETAPA5 = ROOT / "entrega_oficial" / "projeto" / "etapa_5" / "imagens"
 OUT_DIRS = [DIR_ETAPA4, DIR_ETAPA5]
 
@@ -1282,7 +1282,10 @@ def gerar_visual_09(dados: dict) -> None:
 def _limpar_imagens_trocadas() -> None:
     if DIR_ETAPA4.exists():
         for p in DIR_ETAPA4.iterdir():
-            if p.is_file() and (not p.name.startswith(("01", "02")) or p.name == "01_comparacao_3d_modelos.gif"):
+            if p.is_file() and (
+                p.name.startswith(("03", "04", "05", "06", "07", "08", "09"))
+                or p.name == "01_comparacao_3d_modelos.gif"
+            ):
                 p.unlink()
     if DIR_ETAPA5.exists():
         for p in DIR_ETAPA5.iterdir():

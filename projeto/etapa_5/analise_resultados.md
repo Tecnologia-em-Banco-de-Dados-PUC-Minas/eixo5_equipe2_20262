@@ -1,6 +1,6 @@
 # 5. ETAPA 5 — ANÁLISE DOS RESULTADOS
 
-Esta etapa concentra a análise crítica dos resultados obtidos pelos algoritmos treinados na [Etapa 4](../etapa_4/aprendizado_maquina.md) (e na [versão visual com animações 3D individuais](../etapa_4_visual/aprendizado_maquina.md)), apresentando primeiro o panorama espacial e climático descoberto nos dados do Brasil e aprofundando, em seguida, as métricas de erro, os hiperparâmetros ótimos, o peso das variáveis de entrada e o impacto operacional para o Operador Nacional do Sistema Elétrico (ONS). Todos os gráficos e animações desta etapa são gerados em Python (`matplotlib` + `scikit-learn`) sobre os dados reais do experimento pelo script [`gerar_graficos.py`](gerar_graficos.py).
+Esta etapa concentra a análise crítica dos resultados obtidos pelos algoritmos treinados na [Etapa 4](../etapa_4/aprendizado_maquina.md), apresentando primeiro o panorama espacial e climático descoberto nos dados do Brasil e aprofundando, em seguida, as métricas de erro, os hiperparâmetros ótimos, o peso das variáveis de entrada e o impacto operacional para o Operador Nacional do Sistema Elétrico (ONS). Todos os gráficos e animações desta etapa são gerados em Python (`matplotlib` + `scikit-learn`) sobre os dados reais do experimento pelo script [`gerar_graficos.py`](gerar_graficos.py).
 
 ---
 
@@ -173,7 +173,7 @@ Sob a ótica de DataOps e MLOps, o Data Lake Medalhão na AWS sustentou todo o e
 
 ## 6. Referências Bibliográficas e Documentação do Projeto
 
-- **Documentos anteriores da equipe:** [Etapa 1 — Início do Projeto](../inicio_do_projeto.md), [Etapa 2 — Coleta de Dados](../coleta_dados.md), [Etapa 3 — Pré-processamento](../pre_processamento.md), [Etapa 4 — Aprendizagem de Máquina](../etapa_4/aprendizado_maquina.md) e [Etapa 4 — Versão Visual](../etapa_4_visual/aprendizado_maquina.md).
+- **Documentos anteriores da equipe:** [Etapa 1 — Início do Projeto](../inicio_do_projeto.md), [Etapa 2 — Coleta de Dados](../coleta_dados.md), [Etapa 3 — Pré-processamento](../pre_processamento.md) e [Etapa 4 — Aprendizagem de Máquina](../etapa_4/aprendizado_maquina.md).
 - **Códigos e scripts oficiais:** [Comparação de Modelos (`preparacao.py` e scripts `01` a `03`)](../etapa_4/comparacao_modelos/README.md), [Script gerador das figuras (`gerar_graficos.py`)](gerar_graficos.py) e [`modelo2.py`](../etapa_4/modelo2.py).
 - **CASTRO, Leandro Nunes de; FERRARI, Daniel Gomes.** *Introdução à mineração de dados: conceitos básicos, algoritmos e aplicações.* São Paulo: Saraiva, 2016.
 - **FACELI, Katti et al.** *Inteligência artificial: uma abordagem de aprendizado de máquina.* 2. ed. Rio de Janeiro: LTC, 2021.
